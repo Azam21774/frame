@@ -1,0 +1,39 @@
+{
+  "name": "frameio-automation",
+  "version": "1.0.0",
+  "description": "Electron UI for Frame.io multi-account upload/share automation",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win portable"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.0.0"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.frameio.automation",
+    "productName": "FrameioAutomation",
+    "files": [
+      "main.js",
+      "preload.js",
+      "automation.js",
+      "state.js",
+      "renderer/**/*",
+      "automation/**/*",
+      "!data/state.json"
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "portable": {
+      "artifactName": "FrameioAutomation-portable.exe"
+    },
+    "directories": {
+      "output": "dist"
+    }
+  }
+}

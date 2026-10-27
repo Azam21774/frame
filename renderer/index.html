@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Frame.io Automation</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Frame.io Automation</h1>
+    <div class="run-controls">
+      <button id="startBtn" class="btn primary">▶ Start</button>
+      <button id="stopBtn" class="btn danger" disabled>■ Stop</button>
+      <button id="resetBtn" class="btn ghost" title="Mark every account as pending again (full re-run)">Reset progress</button>
+      <span id="runStatus" class="run-status idle">Idle</span>
+    </div>
+  </header>
+
+  <section class="cards">
+    <div class="card">
+      <div class="card-label">Total Recipients</div>
+      <div class="card-value" id="cardTotal">0</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Remaining</div>
+      <div class="card-value" id="cardRemaining">0</div>
+    </div>
+    <div class="card success">
+      <div class="card-label">Success (accounts)</div>
+      <div class="card-value" id="cardSuccess">0</div>
+    </div>
+    <div class="card failed">
+      <div class="card-label">Failed (accounts)</div>
+      <div class="card-value" id="cardFailed">0</div>
+    </div>
+  </section>
+
+  <main>
+    <section class="panel">
+      <h2>Settings</h2>
+      <label>Project Name</label>
+      <input id="projectName" type="text" placeholder="e.g. Client Delivery Oct" />
+
+      <label>Message (optional)</label>
+      <textarea id="message" rows="3" placeholder="Message sent with the share link..."></textarea>
+
+      <div class="row">
+        <div>
+          <label>Chrome batch size (parallel accounts)</label>
+          <input id="batchSize" type="number" min="1" value="3" />
+        </div>
+        <div>
+          <label>Recipients per account (max 25)</label>
+          <input id="recipientsPerAccount" type="number" min="1" max="25" value="25" />
+        </div>
+      </div>
+
+      <button id="saveSettingsBtn" class="btn">Save Settings</button>
+    </section>
+
+    <section class="panel">
+      <h2>Files to Upload</h2>
+      <p class="hint">These are uploaded to every account's project. PDF, images, video — any file type.</p>
+      <button id="pickFilesBtn" class="btn">Choose Files...</button>
+      <p class="hint" id="pickFilesHint"></p>
+      <ul class="file-list" id="fileList"></ul>
+      <p class="hint" id="uploadDirHint"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Recipients</h2>
+      <textarea id="recipientsInput" rows="6" placeholder="One email per line (or comma/semicolon separated)"></textarea>
+      <div class="btn-row">
+        <button id="saveRecipientsBtn" class="btn">Save Recipients</button>
+        <button id="clearRecipientsBtn" class="btn ghost">Clear Recipients</button>
+      </div>
+      <p class="hint" id="recipientsCountHint">0 recipients saved.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Accounts</h2>
+      <textarea id="accountsInput" rows="4" placeholder="email:password (one per line)"></textarea>
+      <button id="addAccountsBtn" class="btn">Add Accounts</button>
+      <p class="hint" id="addAccountsHint"></p>
+
+      <table class="accounts-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Recipients</th>
+            <th>Error</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="accountsBody"></tbody>
+      </table>
+    </section>
+
+    <section class="panel log-panel">
+      <h2>Log</h2>
+      <div id="logBox" class="log-box"></div>
+    </section>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
